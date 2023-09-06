@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             }
 
         amb.entrarParametroBt.setOnClickListener {
-            val parametroIntent = Intent(this, ParametroActivity::class.java)
+            val parametroIntent = Intent("PARAMETRO_ACTIVITY_ACTION")
             parametroIntent.putExtra(PARAMETRO_EXTRA, amb.parametroTv.text.toString())
 
             parl.launch(parametroIntent)
