@@ -1,10 +1,12 @@
 package br.edu.scl.ifsp.ads.intents
 
 import android.content.Intent
+import android.content.Intent.ACTION_VIEW
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
+import android.view.Menu
+import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import br.edu.scl.ifsp.ads.intents.databinding.ActivityMainBinding
@@ -39,6 +41,28 @@ class MainActivity : AppCompatActivity() {
             parametroIntent.putExtra(PARAMETRO_EXTRA, amb.parametroTv.text.toString())
 
             parl.launch(parametroIntent)
+        }
+    }
+
+    //segunda aula nesse codigo
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.viewMi -> {
+                val url: Uri = Uri.parse(amb.parametroTv.text.toString())
+                val navegadorIntent = Intent(ACTION_VIEW, url)
+                startActivity(navegadorIntent)
+                true
+            }
+            R.id.callMi -> true
+            R.id.dialMi -> true
+            R.id.pickMi -> true
+            R.id.chooserMi -> true
+            else -> true
         }
     }
 
