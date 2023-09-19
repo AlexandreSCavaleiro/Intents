@@ -57,8 +57,10 @@ class MainActivity : AppCompatActivity() {
             else{
                 Toast.makeText(this, "Sem permissão, sem chamada!", Toast.LENGTH_SHORT).show()
             }
+        }
+
         pegarImageArl = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            result ->
+                result ->
             if(result.resultCode == RESULT_OK){
                 val imagemUri = result.data?.data
                 imagemUri?.let {
@@ -67,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                     startActivity(visualizarIntent)
                 }
             }
-        }
         }
 
         amb.entrarParametroBt.setOnClickListener {
@@ -110,7 +111,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.pickMi ->{
                 val pegarImagemIntent = Intent(ACTION_PICK)
-                val diretorioImagens = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).path
+                val diretorioImagens = Environment
+                    .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                    .path
+
                 pegarImagemIntent.setDataAndType(Uri.parse(diretorioImagens), "image/*")
                 pegarImageArl.launch(pegarImagemIntent);
                 true
